@@ -1,0 +1,180 @@
+@charset "utf-8";
+/* CSS Document */
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video, button, input {
+	margin: 0;
+	padding: 0;
+	font-size: 100%;
+	font: inherit;
+  vertical-align: baseline;
+  box-sizing: border-box;
+  font-family: 'Calibri', 'Trebuchet MS', sans-serif;
+  color: rgb(219, 219, 219);
+}
+
+html, body, .root, .app {
+  height: 100%;
+  width: 100%;
+  background-color: #2e3d49;
+}
+
+.container {
+  height: 100vh;
+}
+
+h1 {
+  font-weight: 600;
+  font-size: 1.5rem;
+  width: 100%;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid rgb(122, 122, 122);
+  text-align: center;
+  padding: 5px;
+}
+
+.sidebar {
+  height: 100%;
+  width: 300px;
+  position: absolute;
+  left: -300px;
+  transition: all 0.3s;
+  z-index: 10;
+}
+
+.sidebar.active {
+  left: 0px;
+}
+
+#hamburger-icon {
+  position: absolute;
+  top: 40px;
+  left: 310px;
+  z-index: 99;
+  background: none;
+  font-size: 30px;
+  color: black;
+}
+
+.filtering {
+  margin: 10px 0;
+  height: 30px;
+  display: flex;
+}
+
+.filtering #search {
+  border: 0;
+  flex-grow: 3;
+  color: black;
+}
+
+.filtering button:hover {
+  background-color: #2e3d49;
+  color: #02ccba;
+  transition: all 0.5s;
+}
+
+.filtering #search:focus {
+  outline-color: #02ccba;
+}
+
+button {
+  font-family: 'Calibri', 'Trebuchet MS', sans-serif;
+  font-size: 100%;
+  font-weight: 600;
+  border: none;
+  outline: none;
+  letter-spacing: 1px;
+  flex-grow: 1;
+  color: #2e3d49;
+}
+
+.restaurant-list {
+  padding: 0;
+  overflow: auto;
+  max-height: calc(100vh - 150px)
+}
+
+.restaurant-list li {
+  padding-left: 10px;
+  list-style: none;
+  line-height: 40px;
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+  overflow-wrap: break-word;
+  border-bottom: 0.5px solid rgba(122, 122, 122, 0.61);
+}
+
+.restaurant-list li:hover {
+  color: #02ccba;
+  border-bottom: 0.5px solid #02ccba;
+  transition: color 0.5s;
+}
+
+.sidebar p {
+  color: #02ccba;
+  padding: 10px;
+  letter-spacing: 0.5px;
+  position: absolute;
+  bottom: 5px;
+  display: block;
+}
+
+#map {
+  bottom: 0px;
+  height: 100%;
+  right: 0px;
+  left: 0px;
+  position: absolute;
+}
+
+#map.active {
+  left: 300px;
+}
+
+/* ====================== Custom Scrollbar ====================== */
+
+::-webkit-scrollbar-track {
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.1);
+	background-color: #2e3d49;
+	border-radius: 10px;
+}
+
+::-webkit-scrollbar {
+	width: 10px;
+	background-color: #2e3d49;
+}
+
+::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+	background-color: #02ccbb79;
+}
+
+/* ====================== Media Queries ====================== */
+
+@media only screen and (min-width: 600px) {
+  .sidebar {
+    left: 0px;
+  }
+  #map {
+    left: 300px;
+  }
+  #hamburger-icon {
+    display: none;
+  }
+}
