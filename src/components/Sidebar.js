@@ -1,13 +1,26 @@
 import React, { Component } from 'react'
-import logo from '../icons/funnel.svg'
 import Category from './Category'
+import escapeRegExp from 'escape-string-regexp'
+import sortBy from 'sort-by'
 
 class Sidebar extends Component {
   state = {
     query: ''
   }
 
+  updateQuery = (query) => {
+    this.setState({ query })
+  }
+
   render() {
+    let showingPlaces;
+    if (this.state.query) {
+      const match = new RegExp(escapeRegExp(this.state.query), 'i');
+      showingPlaces = this.props.places.filter(venue => match.test(venue.name));
+    } else {
+      showingPlaces = this.props.places;
+    }
+    showingPlaces.sort(sortBy('name'))
     return (
       <aside className="sidebar">
         <h1>Eat'nDrink<br />Find Cafes in Bath</h1>
@@ -19,15 +32,15 @@ class Sidebar extends Component {
             placeholder="  e.g. Pizza, Breakfast, Wine..."
             aria-label="Search Cafes"
             value={this.state.query}
+            onChange={event => this.updateQuery(event.target.value)}
              />
-          <button><img src={logo} alt="funnel" width="16px" height="16px" /> Filter</button>
         </div>
         <div className="restaurant-list">
           <Category
             title="Tea Rooms"
             >
               <ul className="restaurant-list">
-                {this.props.places.filter(venue => {
+                {showingPlaces.filter(venue => {
                   let match = new RegExp(/\btea\b/, 'i')
                   return match.test(venue.name) ? venue.name : ''
                     }).map(venue =>
@@ -40,7 +53,7 @@ class Sidebar extends Component {
             title="Coffee Shops"
           >
             <ul className="cafe-list">
-              {this.props.places.filter(venue => {
+              {showingPlaces.filter(venue => {
                 let match = new RegExp(/\bcoffee\b/, 'i')
                 return match.test(venue.name) ? venue.name : ''
               }).map(venue =>
