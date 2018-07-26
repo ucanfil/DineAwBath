@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import logo from '../icons/funnel.svg'
+import Category from './Category'
 
 class Sidebar extends Component {
   state = {
@@ -21,12 +22,34 @@ class Sidebar extends Component {
              />
           <button><img src={logo} alt="funnel" width="16px" height="16px" /> Filter</button>
         </div>
-        <ul className="restaurant-list">
-          {this.props.places.map(venue =>
-            <li key={venue.id}>
-              <a>{venue.name}</a>
-            </li>)}
-        </ul>
+        <div className="restaurant-list">
+          <Category
+            title="Tea Rooms"
+            >
+              <ul className="restaurant-list">
+                {this.props.places.filter(venue => {
+                  let match = new RegExp(/\btea\b/, 'i')
+                  return match.test(venue.name) ? venue.name : ''
+                    }).map(venue =>
+                      <li key={venue.id}>
+                        <a>{venue.name}</a>
+                      </li>)}
+              </ul>
+          </Category>
+          <Category
+            title="Coffee Shops"
+          >
+            <ul className="cafe-list">
+              {this.props.places.filter(venue => {
+                let match = new RegExp(/\bcoffee\b/, 'i')
+                return match.test(venue.name) ? venue.name : ''
+              }).map(venue =>
+                <li key={venue.id}>
+                  <a>{venue.name}</a>
+                </li>)}
+            </ul>
+          </Category>
+        </div>
         <p>> This app uses foursquare places and google maps api</p>
       </aside>
     )
