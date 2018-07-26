@@ -107,7 +107,7 @@ button {
 .restaurant-list {
   padding: 0;
   overflow: auto;
-  max-height: calc(100vh - 150px)
+  max-height: calc(100vh - 175px)
 }
 
 .restaurant-list li {
