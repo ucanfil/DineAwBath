@@ -53,8 +53,7 @@ h2 {
   font-size: 1.2rem;
   width: 100%;
   letter-spacing: 0.5px;
-  color: #02ccba;
-  border-bottom: 1px solid #02ccba;
+  border-bottom: 1px solid rgb(122, 122, 122);
   text-align: center;
   padding: 5px;
 }
@@ -92,6 +91,10 @@ h2 {
   border: 0;
   flex-grow: 3;
   color: black;
+  background-image: url('./icons/funnel.svg');
+  background-repeat: no-repeat;
+  background-position: 97% 50%;
+  background-size: 20px 20px;
 }
 
 .filtering button:hover {
@@ -102,17 +105,6 @@ h2 {
 
 .filtering #search:focus {
   outline-color: #02ccba;
-}
-
-button {
-  font-family: 'Calibri', 'Trebuchet MS', sans-serif;
-  font-size: 100%;
-  font-weight: 600;
-  border: none;
-  outline: none;
-  letter-spacing: 1px;
-  flex-grow: 1;
-  color: #2e3d49;
 }
 
 .restaurant-list {
