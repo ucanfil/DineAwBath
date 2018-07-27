@@ -31,7 +31,6 @@ time, mark, audio, video, button, input {
 html, body, .root, .app {
   height: 100%;
   width: 100%;
-  background-color: #2e3d49;
 }
 
 .container {
@@ -65,6 +64,7 @@ h2 {
   left: -300px;
   transition: all 0.3s;
   z-index: 1;
+  background-color: #2e3d49;
 }
 
 .sidebar.active {
@@ -95,12 +95,6 @@ h2 {
   background-repeat: no-repeat;
   background-position: 97% 50%;
   background-size: 20px 20px;
-}
-
-.filtering button:hover {
-  background-color: #2e3d49;
-  color: #02ccba;
-  transition: all 0.5s;
 }
 
 .filtering #search:focus {
