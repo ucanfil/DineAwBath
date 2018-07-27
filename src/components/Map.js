@@ -7,6 +7,7 @@ export class MapContainer extends Component {
   }
 
   render() {
+    // Map Style object
     const style = {
       bottom: '0px',
       height: '100%',
@@ -14,6 +15,18 @@ export class MapContainer extends Component {
       left: '300px',
       position: 'absolute',
     }
+
+    // Creating points array of places
+    const points = [];
+    const bounds = new this.props.google.maps.LatLngBounds();
+    for (let i = 0; i < this.props.places.length; i++) {
+      // Get the position from the locations array.
+      const myLatLng = new this.props.google.maps.LatLng(this.props.places[i].location.lat, this.props.places[i].location.lng);
+      points.push(myLatLng);
+      bounds.extend(points[i]);
+    }
+    console.log(points);
+
     return (
       <Map
         google={this.props.google}
@@ -24,11 +37,17 @@ export class MapContainer extends Component {
           lng: -2.359043
         }}
         onClick={this.onMapClicked}
+        bounds={bounds}
         >
 
-        <Marker
-          onClick={this.onMarkerClick}
-          name={'Current location'} />
+        {this.props.places.map(venue => (
+          <Marker
+            key={venue.id}
+            onClick={this.onMarkerClick}
+            name={venue.name}
+            position={{ lat: venue.location.lat, lng: venue.location.lng}}
+          />
+        ))}
 
         <InfoWindow onClose={this.onInfoWindowClose}>
           <div>
