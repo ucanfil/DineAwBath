@@ -9,11 +9,8 @@ export class MapContainer extends Component {
   render() {
     // Map Style object
     const style = {
-      bottom: '0px',
-      height: '100%',
-      right: '0px',
-      left: '300px',
-      position: 'absolute',
+      width: '100%',
+      height: '100%'
     }
 
     // Creating points array of places
