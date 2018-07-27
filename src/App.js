@@ -62,7 +62,7 @@ class App extends Component {
               <input
                 id="search"
                 type="text"
-                placeholder="  e.g. Pizza, Breakfast, Wine..."
+                placeholder="  Filter Cafes: e.g. Tea Room, Coffee..."
                 aria-label="Search Cafes"
                 value={this.state.query}
                 onChange={event => this.updateQuery(event.target.value)}
