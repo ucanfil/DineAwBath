@@ -11,7 +11,7 @@ class App extends Component {
   state = {
     places: [],
     query: '',
-    isOpen: true
+    isOpen: false
   }
 
   updateQuery = (query) => {
