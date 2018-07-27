@@ -5,25 +5,27 @@ import MapContainer from './components/Map'
 import * as PlacesAPI from './components/PlacesAPI'
 import escapeRegExp from 'escape-string-regexp'
 import sortBy from 'sort-by'
+import HamburgerMenu from 'react-hamburger-menu' // https://github.com/cameronbourke/react-hamburger-menu
 
 class App extends Component {
   state = {
     places: [],
-    query: ''
+    query: '',
+    isOpen: true
   }
 
   updateQuery = (query) => {
     this.setState({ query })
   }
 
-  componentDidMount() {
-    PlacesAPI.getAll().then(places => {
-      this.setState( {places: places.response.venues} )
-    });
+  handleClick = () => {
+    this.setState({ isOpen: !this.state.isOpen })
   }
 
-  toggleSidebar() {
-
+  componentDidMount() {
+    PlacesAPI.getAll().then(places => {
+      this.setState({ places: places.response.venues })
+    });
   }
 
   render() {
@@ -41,9 +43,21 @@ class App extends Component {
     return (
       <div className="App">
         <div className="container">
-          <aside className="sidebar">
+          <aside className={this.state.isOpen ? "sidebar active" : "sidebar"}>
             <h1>Eat'nDrink<br />Find Cafes in Bath</h1>
-            <button id="hamburger-icon" onClick={this.toggleSidebar}>&#9776</button>
+            <div className="hamburger-menu">
+              <HamburgerMenu
+                isOpen={this.state.isOpen}
+                menuClicked={this.handleClick}
+                width={27}
+                height={22}
+                strokeWidth={3}
+                rotate={0}
+                color='black'
+                borderRadius={0}
+                animationDuration={0.5}
+              />
+            </div>
             <div className="filtering">
               <input
                 id="search"
@@ -57,9 +71,11 @@ class App extends Component {
             <RestaurantList places={showingPlaces} />
             <p>> This app uses foursquare places and google maps api</p>
           </aside>
-          <MapContainer
-            places={showingPlaces}
-            />
+          <div id='map' className={this.state.isOpen ? "active" : null}>
+            <MapContainer
+              places={showingPlaces}
+              />
+          </div>
         </div>
       </div>
     );
