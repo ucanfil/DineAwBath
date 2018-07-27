@@ -25,7 +25,9 @@ class App extends Component {
       <div className="App">
         <div className="container">
           <Sidebar places={this.state.places}/>
-          <MapContainer />
+          <MapContainer
+            places={this.state.places}
+            />
         </div>
       </div>
     );
