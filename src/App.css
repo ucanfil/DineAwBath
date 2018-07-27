@@ -71,9 +71,9 @@ h2 {
   left: 0px;
 }
 
-#hamburger-icon {
+.hamburger-menu {
   position: absolute;
-  top: 40px;
+  top: 50px;
   left: 310px;
   z-index: 99;
   background: none;
@@ -174,8 +174,14 @@ h2 {
   .sidebar {
     left: 0px;
   }
+  .sidebar.active {
+    left: -300px;
+  }
   #map {
     left: 300px;
+  }
+  #map.active {
+    left: 0px;
   }
   #hamburger-icon {
     display: none;
