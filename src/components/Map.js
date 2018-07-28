@@ -3,8 +3,44 @@ import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
 
 export class MapContainer extends Component {
   state = {
-    selectedPlace: {name: 'Bath'}
+    selectedPlace: {},
+    activeMarker: {},
+    showingInfoWindow: false
   }
+
+
+  onMouseOverMarker = (props, marker, e) => {
+    this.setState({
+      selectedPlace: props,
+      activeMarker: marker,
+      showingInfoWindow: true
+    });
+  };
+
+
+  onMarkerClick = (props, marker, e) => {
+    this.setState({
+      selectedPlace: props,
+      activeMarker: marker,
+      showingInfoWindow: true
+    });
+  };
+
+  onMapClicked = (props) => {
+    if (this.state.showingInfoWindow) {
+      this.setState({
+        showingInfoWindow: false,
+        activeMarker: null
+      })
+    }
+  };
+
+  onInfoWindowClose = () => {
+    this.setState({
+      showingInfoWindow: false,
+      activeMarker: null
+    });
+  };
 
   render() {
     // Map Style object
@@ -37,20 +73,26 @@ export class MapContainer extends Component {
         bounds={bounds}
         >
 
-        {this.props.places.map(venue => (
+        {this.props.places.map((venue, i) => (
           <Marker
-            key={venue.id}
+            key={i}
             onClick={this.onMarkerClick}
             name={venue.name}
             position={{ lat: venue.location.lat, lng: venue.location.lng}}
+            onMouseOver={this.onMouseOverMarker}
           />
         ))}
-
-        <InfoWindow onClose={this.onInfoWindowClose}>
-          <div>
-            <h1>{this.state.selectedPlace.name}</h1>
-          </div>
-        </InfoWindow>
+        {this.props.places.map((venue, i) => (
+          <InfoWindow
+            key={i}
+            onClose={this.onInfoWindowClose}
+            marker={this.state.activeMarker}
+            visible={this.state.showingInfoWindow}>
+            <div>
+              <h1>{this.state.selectedPlace.name}</h1>
+            </div>
+          </InfoWindow>
+        ))}
       </Map>
     );
   }
