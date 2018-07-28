@@ -8,4 +8,14 @@ export const getAll = () =>
     })
     .catch(function (err) {
       console.log(err);
-    })
+    });
+
+/*
+    .then(function (res) {
+  const locations = [];
+  res.map(venue => {
+    locations.push(fetch(`https://api.foursquare.com/v2/venues/${venue.id}?client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}&ll=51.381417,-2.359043&v=20180323`));
+  });
+  return locations;
+})
+*/
