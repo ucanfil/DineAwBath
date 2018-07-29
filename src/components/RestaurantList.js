@@ -15,7 +15,9 @@ class RestaurantList extends Component {
                 let match = new RegExp(/\btea\b/, 'i')
                 return match.test(venue.name) ? venue.name : ''
                   }).map(venue =>
-                    <li key={venue.id}>
+                    <li
+                      onClick={() => this.props.onOpenModal(venue)}
+                      key={venue.id}>
                       <a>{venue.name}</a>
                     </li>)}
             </ul>
