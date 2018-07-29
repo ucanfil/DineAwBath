@@ -12,7 +12,7 @@ class App extends Component {
   state = {
     places: [],
     query: '',
-    isOpen: false,
+    isSidebarOpen: false,
     showModal: false,
     venue: {},
   }
@@ -22,7 +22,7 @@ class App extends Component {
   }
 
   handleClick = () => {
-    this.setState({ isOpen: !this.state.isOpen })
+    this.setState({ isSidebarOpen: !this.state.isSidebarOpen })
   }
 
   componentDidMount() {
@@ -54,11 +54,11 @@ class App extends Component {
     return (
       <div className="App">
         <div className="container">
-          <aside className={this.state.isOpen ? "sidebar active" : "sidebar"}>
+          <aside className={this.state.isSidebarOpen ? "sidebar active" : "sidebar"}>
             <h1>Eat'nDrink<br />Find Cafes in Bath</h1>
             <div className="hamburger-menu">
               <HamburgerMenu
-                isOpen={this.state.isOpen}
+                isOpen={this.state.isSidebarOpen}
                 menuClicked={this.handleClick}
                 width={27}
                 height={22}
@@ -84,7 +84,7 @@ class App extends Component {
               places={showingPlaces} />
             <p>> This app uses foursquare places and google maps api</p>
           </aside>
-          <div id='map' className={this.state.isOpen ? "active" : null}>
+          <div id='map' className={this.state.isSidebarOpen ? "active" : null}>
             <MapContainer
               onOpenModal={this.handleToggleModal}
               places={showingPlaces}
