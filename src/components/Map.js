@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
+import { Map, Marker, GoogleApiWrapper } from 'google-maps-react';
 
 export class MapContainer extends Component {
   state = {
@@ -10,15 +10,6 @@ export class MapContainer extends Component {
 
 
   onMouseOverMarker = (props, marker, e) => {
-    this.setState({
-      selectedPlace: props,
-      activeMarker: marker,
-      showingInfoWindow: true
-    });
-  };
-
-
-  onMarkerClick = (props, marker, e) => {
     this.setState({
       selectedPlace: props,
       activeMarker: marker,
@@ -58,7 +49,6 @@ export class MapContainer extends Component {
       points.push(myLatLng);
       bounds.extend(points[i]);
     }
-    console.log(points);
 
     return (
       <Map
@@ -76,22 +66,12 @@ export class MapContainer extends Component {
         {this.props.places.map((venue, i) => (
           <Marker
             key={i}
-            onClick={this.onMarkerClick}
+            onClick={() => this.props.onOpenModal(venue)}
             name={venue.name}
             position={{ lat: venue.location.lat, lng: venue.location.lng}}
             onMouseOver={this.onMouseOverMarker}
+            animation={this.props.google.maps.Animation.DROP}
           />
-        ))}
-        {this.props.places.map((venue, i) => (
-          <InfoWindow
-            key={i}
-            onClose={this.onInfoWindowClose}
-            marker={this.state.activeMarker}
-            visible={this.state.showingInfoWindow}>
-            <div>
-              <h1>{this.state.selectedPlace.name}</h1>
-            </div>
-          </InfoWindow>
         ))}
       </Map>
     );
