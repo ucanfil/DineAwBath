@@ -6,12 +6,15 @@ import * as PlacesAPI from './components/PlacesAPI'
 import escapeRegExp from 'escape-string-regexp'
 import sortBy from 'sort-by'
 import HamburgerMenu from 'react-hamburger-menu' // https://github.com/cameronbourke/react-hamburger-menu
+import Modal from './components/Modal'
 
 class App extends Component {
   state = {
     places: [],
     query: '',
-    isOpen: false
+    isOpen: false,
+    showModal: false,
+    venue: {},
   }
 
   updateQuery = (query) => {
@@ -28,8 +31,16 @@ class App extends Component {
     });
   }
 
+  handleToggleModal = (venue) => {
+    this.setState({
+      venue: venue,
+      showModal: true,
+    })
+  }
+
+  handleCloseModal = () => this.setState({ showModal: false })
+
   render() {
-    console.log(this.state.places);
 
     let showingPlaces;
     if (this.state.query) {
@@ -68,14 +79,23 @@ class App extends Component {
                 onChange={event => this.updateQuery(event.target.value)}
               />
             </div>
-            <RestaurantList places={showingPlaces} />
+            <RestaurantList
+              onOpenModal={this.handleToggleModal}
+              places={showingPlaces} />
             <p>> This app uses foursquare places and google maps api</p>
           </aside>
           <div id='map' className={this.state.isOpen ? "active" : null}>
             <MapContainer
+              onOpenModal={this.handleToggleModal}
               places={showingPlaces}
               />
           </div>
+          {this.state.showModal ? (
+            <Modal
+              onClose={this.handleCloseModal}>
+              {this.state.venue.name}
+            </Modal>
+          ) : null}
         </div>
       </div>
     );
