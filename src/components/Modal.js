@@ -57,8 +57,8 @@ class Modal extends Component {
               alt={this.state.venueDetails.name}
             />
             <div className="venue-details">
-              <span className="highlighted">Open Now:</span><span>{this.state.venueDetails.hours ? this.state.venueDetails.hours.isOpen ? "Yes" : "No" : "No info provided by foursquare"}</span>
-              <span className="highlighted">Address:</span><span>{this.state.venueDetails.location ? this.state.venueDetails.location.address + ", " + this.state.venueDetails.location.city :"No info provided by foursquare"}</span>
+              <span className="highlighted">Open Now:</span><span>{this.state.venueDetails.hours && this.state.venueDetails.hours.isOpen ? this.state.venueDetails.hours.isOpen ? "Yes" : "No" : "No info provided by foursquare"}</span>
+              <span className="highlighted">Address:</span><span>{this.state.venueDetails.location && this.state.venueDetails.location.address && this.state.venueDetails.location.city ? this.state.venueDetails.location.address + ", " + this.state.venueDetails.location.city : "No info provided by foursquare"}</span>
             </div>
             <button
               className="modal-close"
