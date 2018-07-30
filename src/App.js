@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './App.css'
 import RestaurantList from './components/RestaurantList'
+import Category from './components/Category'
 import MapContainer from './components/Map'
 import * as PlacesAPI from './components/PlacesAPI'
 import escapeRegExp from 'escape-string-regexp'
@@ -80,20 +81,54 @@ class App extends Component {
               />
             </div>
             <RestaurantList
-              onOpenModal={this.handleToggleModal}
-              places={showingPlaces} />
+              places={showingPlaces}
+            >
+              <Category
+                title="Tea Rooms"
+              >
+                <ul className="cafe-list">
+                  {showingPlaces.filter(venue => {
+                    let match = new RegExp(/\btea\b/, 'i')
+                    return match.test(venue.name) ? venue.name : ''
+                  }).map(venue =>
+                    <li
+                      onClick={() => this.handleToggleModal(venue)}
+                      key={venue.id}>
+                      <a>{venue.name}</a>
+                    </li>)}
+                </ul>
+              </Category>
+              <Category
+                title="Coffee Shops"
+              >
+                <ul className="cafe-list">
+                  {showingPlaces.filter(venue => {
+                    let match = new RegExp(/\bcoffee\b/, 'i')
+                    return match.test(venue.name) ? venue.name : ''
+                  }).map(venue =>
+                    <li
+                      onClick={() => this.handleToggleModal(venue)}
+                      key={venue.id}>
+                      <a>{venue.name}</a>
+                    </li>)}
+                </ul>
+              </Category>
+            </RestaurantList>
             <p>> This app uses foursquare places and google maps api</p>
           </aside>
           <div id='map' className={this.state.isSidebarOpen ? "active" : null}>
             <MapContainer
               onOpenModal={this.handleToggleModal}
-              places={showingPlaces}
+              places={showingPlaces.filter(venue => {
+                let match = new RegExp(/\bcoffee\b|\btea\b/, 'i')
+                return match.test(venue.name) ? venue.name : ''
+              })}
               />
           </div>
           {this.state.showModal ? (
             <Modal
-              onClose={this.handleCloseModal}>
-              {this.state.venue.name}
+              onClose={this.handleCloseModal}
+              venue={this.state.venue}>
             </Modal>
           ) : null}
         </div>
