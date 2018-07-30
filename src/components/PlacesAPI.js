@@ -7,15 +7,14 @@ export const getAll = () =>
       return res.json();
     })
     .catch(function (err) {
-      console.log(err);
+      console.log('An error occured while fetching foursquare places api', err);
     });
 
-/*
-    .then(function (res) {
-  const locations = [];
-  res.map(venue => {
-    locations.push(fetch(`https://api.foursquare.com/v2/venues/${venue.id}?client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}&ll=51.381417,-2.359043&v=20180323`));
-  });
-  return locations;
-})
-*/
+export const getVenueDetails = (id) =>
+  fetch(`https://api.foursquare.com/v2/venues/${id}?client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}&locale=en&v=20180323`)
+    .then(function (res){
+      return res.json();
+    })
+    .catch(function (err) {
+      console.log('An error occured while fetching foursquare places api', err);
+    });

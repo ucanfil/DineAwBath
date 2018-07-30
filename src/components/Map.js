@@ -4,23 +4,19 @@ import { Map, Marker, GoogleApiWrapper } from 'google-maps-react';
 export class MapContainer extends Component {
   state = {
     selectedPlace: {},
-    activeMarker: {},
-    showingInfoWindow: false
+    activeMarker: {}
   }
-
 
   onMouseOverMarker = (props, marker, e) => {
     this.setState({
       selectedPlace: props,
-      activeMarker: marker,
-      showingInfoWindow: true
+      activeMarker: marker
     });
   };
 
   onMapClicked = (props) => {
     if (this.state.showingInfoWindow) {
       this.setState({
-        showingInfoWindow: false,
         activeMarker: null
       })
     }
@@ -28,7 +24,6 @@ export class MapContainer extends Component {
 
   onInfoWindowClose = () => {
     this.setState({
-      showingInfoWindow: false,
       activeMarker: null
     });
   };
