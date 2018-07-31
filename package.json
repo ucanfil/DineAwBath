@@ -2,7 +2,7 @@
   "name": "dineobath",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://ucanfil.github.io/Eat-nDrink/",
+  "homepage": "https://ucanfil.github.io/dineobath/",
   "dependencies": {
     "escape-string-regexp": "^1.0.5",
     "gh-pages": "^1.2.0",
