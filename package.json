@@ -2,9 +2,12 @@
   "name": "dineobath",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://ucanfil.github.io/Eat-nDrink/",
   "dependencies": {
     "escape-string-regexp": "^1.0.5",
+    "gh-pages": "^1.2.0",
     "google-maps-react": "^2.0.2",
+    "prop-types": "^15.6.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-focus-lock": "^1.11.2",
@@ -16,6 +19,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "eject": "react-scripts eject"
   }
 }
