@@ -118,6 +118,10 @@ h2 {
   border-bottom: 0.5px solid rgba(122, 122, 122, 0.61);
 }
 
+.restaurant-list li a {
+  text-decoration: none;
+}
+
 .restaurant-list li:hover a {
   color: #02ccba;
   transition: color 0.5s;

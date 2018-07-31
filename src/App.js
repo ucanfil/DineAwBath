@@ -97,7 +97,7 @@ class App extends Component {
                       tabIndex={this.state.isSidebarOpen ? "0" : "-1"}
                       onClick={() => this.handleToggleModal(venue)}
                       key={venue.id}>
-                      <a>{venue.name}</a>
+                      <a href="#internal">{venue.name}</a>
                     </li>)}
                 </ul>
               </Category>
@@ -113,7 +113,7 @@ class App extends Component {
                       tabIndex={this.state.isSidebarOpen ? "0" : "-1"}
                       onClick={() => this.handleToggleModal(venue)}
                       key={venue.id}>
-                      <a>{venue.name}</a>
+                      <a href="#internal">{venue.name}</a>
                     </li>)}
                 </ul>
               </Category>
