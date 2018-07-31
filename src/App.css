@@ -34,7 +34,7 @@ html, body, .root, .app {
 }
 
 .container {
-  height: 100vh;
+  height: 100%;
 }
 
 h1 {
@@ -61,14 +61,14 @@ h2 {
   height: 100%;
   width: 300px;
   position: absolute;
-  left: -300px;
+  left: 0px;
   transition: all 0.3s;
   z-index: 1;
   background-color: #2e3d49;
 }
 
-.sidebar.active {
-  left: 0px;
+.sidebar.disabled {
+  left: -300px;
 }
 
 .hamburger-menu {
@@ -79,6 +79,7 @@ h2 {
   background: none;
   font-size: 30px;
   color: black;
+  border: none;
 }
 
 .filtering {
@@ -123,7 +124,7 @@ h2 {
   cursor: pointer;
 }
 
-.sidebar p {
+.sidebar footer {
   color: #02ccba;
   padding: 10px;
   letter-spacing: 0.5px;
@@ -136,12 +137,12 @@ h2 {
   bottom: 0px;
   height: 100%;
   right: 0px;
-  left: 0px;
+  left: 300px;
   position: absolute;
 }
 
-#map.active {
-  left: 300px;
+#map.disabled {
+  left: 0px;
 }
 
 /* ====================== Modal Window Styles ====================== */
@@ -205,21 +206,22 @@ h2 {
 }
 
 /* ====================== Media Queries ====================== */
-
+/*
 @media only screen and (min-width: 600px) {
   .sidebar {
     left: 0px;
   }
-  .sidebar.active {
+  .sidebar.disabled {
     left: -300px;
   }
   #map {
     left: 300px;
   }
-  #map.active {
+  #map.disabled {
     left: 0px;
   }
   #hamburger-icon {
     display: none;
   }
 }
+*/
