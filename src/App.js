@@ -13,7 +13,7 @@ class App extends Component {
   state = {
     places: [],
     query: '',
-    isSidebarOpen: false,
+    isSidebarOpen: true,
     showModal: false,
     venue: {},
   }
@@ -55,9 +55,11 @@ class App extends Component {
     return (
       <div className="App">
         <div className="container">
-          <aside className={this.state.isSidebarOpen ? "sidebar active" : "sidebar"}>
+          <aside className={this.state.isSidebarOpen ? "sidebar" : "sidebar disabled"}>
             <h1>Eat'nDrink<br />Find Cafes in Bath</h1>
-            <div className="hamburger-menu">
+            <button
+              className="hamburger-menu"
+              aria-expanded={this.state.isSidebarOpen}>
               <HamburgerMenu
                 isOpen={this.state.isSidebarOpen}
                 menuClicked={this.handleClick}
@@ -69,7 +71,7 @@ class App extends Component {
                 borderRadius={0}
                 animationDuration={0.5}
               />
-            </div>
+            </button>
             <div className="filtering">
               <input
                 id="search"
@@ -86,12 +88,13 @@ class App extends Component {
               <Category
                 title="Tea Rooms"
               >
-                <ul className="cafe-list">
+                <ul className="cafe-list" aria-labelledby="categoryheader">
                   {showingPlaces.filter(venue => {
                     let match = new RegExp(/\btea\b/, 'i')
                     return match.test(venue.name) ? venue.name : ''
                   }).map(venue =>
                     <li
+                      tabIndex={this.state.isSidebarOpen ? "0" : "-1"}
                       onClick={() => this.handleToggleModal(venue)}
                       key={venue.id}>
                       <a>{venue.name}</a>
@@ -101,12 +104,13 @@ class App extends Component {
               <Category
                 title="Coffee Shops"
               >
-                <ul className="cafe-list">
+                <ul className="cafe-list" aria-labelledby="categoryheader">
                   {showingPlaces.filter(venue => {
                     let match = new RegExp(/\bcoffee\b/, 'i')
                     return match.test(venue.name) ? venue.name : ''
                   }).map(venue =>
                     <li
+                      tabIndex={this.state.isSidebarOpen ? "0" : "-1"}
                       onClick={() => this.handleToggleModal(venue)}
                       key={venue.id}>
                       <a>{venue.name}</a>
@@ -114,9 +118,12 @@ class App extends Component {
                 </ul>
               </Category>
             </RestaurantList>
-            <p>> This app uses foursquare places and google maps api</p>
+            <footer>> This app uses foursquare places and google maps api</footer>
           </aside>
-          <div id='map' className={this.state.isSidebarOpen ? "active" : null}>
+          <main
+            id='map'
+            role='application'
+            className={this.state.isSidebarOpen ? null : "disabled"}>
             <MapContainer
               onOpenModal={this.handleToggleModal}
               places={showingPlaces.filter(venue => {
@@ -124,14 +131,14 @@ class App extends Component {
                 return match.test(venue.name) ? venue.name : ''
               })}
               />
-          </div>
-          {this.state.showModal ? (
-            <Modal
-              onClose={this.handleCloseModal}
-              venue={this.state.venue}>
-            </Modal>
-          ) : null}
+          </main>
         </div>
+        {this.state.showModal ? (
+          <Modal
+            onClose={this.handleCloseModal}
+            venue={this.state.venue}>
+          </Modal>
+        ) : null}
       </div>
     );
   }
