@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Eat'nDrink",
+  "name": "Eat'nDrink Find Cafes in Bath",
   "icons": [
     {
       "src": "favicon.ico",
