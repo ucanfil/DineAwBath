@@ -42,26 +42,26 @@ class App extends Component {
   handleCloseModal = () => this.setState({ showModal: false })
 
   render() {
-
+    const { query, places, isSidebarOpen, showModal, venue } = this.state;
     let showingPlaces;
-    if (this.state.query) {
-      const match = new RegExp(escapeRegExp(this.state.query), 'i');
-      showingPlaces = this.state.places.filter(venue => match.test(venue.name));
+    if (query) {
+      const match = new RegExp(escapeRegExp(query), 'i');
+      showingPlaces = places.filter(venue => match.test(venue.name));
     } else {
-      showingPlaces = this.state.places;
+      showingPlaces = places;
     }
     showingPlaces.sort(sortBy('name'));
 
     return (
       <div className="App">
         <div className="container">
-          <aside className={this.state.isSidebarOpen ? "sidebar" : "sidebar disabled"}>
+          <aside className={isSidebarOpen ? "sidebar" : "sidebar disabled"}>
             <h1>Eat'nDrink<br />Find Cafes in Bath</h1>
             <button
               className="hamburger-menu"
-              aria-expanded={this.state.isSidebarOpen}>
+              aria-expanded={isSidebarOpen}>
               <HamburgerMenu
-                isOpen={this.state.isSidebarOpen}
+                isOpen={isSidebarOpen}
                 menuClicked={this.handleClick}
                 width={27}
                 height={22}
@@ -78,7 +78,7 @@ class App extends Component {
                 type="text"
                 placeholder="  Filter Cafes: e.g. Tea Room, Coffee..."
                 aria-label="Search Cafes"
-                value={this.state.query}
+                value={query}
                 onChange={event => this.updateQuery(event.target.value)}
               />
             </div>
@@ -94,7 +94,7 @@ class App extends Component {
                     return match.test(venue.name) ? venue.name : ''
                   }).map(venue =>
                     <li
-                      tabIndex={this.state.isSidebarOpen ? "0" : "-1"}
+                      tabIndex={isSidebarOpen ? "0" : "-1"}
                       onClick={() => this.handleToggleModal(venue)}
                       key={venue.id}>
                       <a href="#internal">{venue.name}</a>
@@ -110,7 +110,7 @@ class App extends Component {
                     return match.test(venue.name) ? venue.name : ''
                   }).map(venue =>
                     <li
-                      tabIndex={this.state.isSidebarOpen ? "0" : "-1"}
+                      tabIndex={isSidebarOpen ? "0" : "-1"}
                       onClick={() => this.handleToggleModal(venue)}
                       key={venue.id}>
                       <a href="#internal">{venue.name}</a>
@@ -123,7 +123,7 @@ class App extends Component {
           <main
             id='map'
             role='application'
-            className={this.state.isSidebarOpen ? null : "disabled"}>
+            className={isSidebarOpen ? null : "disabled"}>
             <MapContainer
               onOpenModal={this.handleToggleModal}
               places={showingPlaces.filter(venue => {
@@ -133,10 +133,10 @@ class App extends Component {
               />
           </main>
         </div>
-        {this.state.showModal ? (
+        {showModal ? (
           <Modal
             onClose={this.handleCloseModal}
-            venue={this.state.venue}>
+            venue={venue}>
           </Modal>
         ) : null}
       </div>

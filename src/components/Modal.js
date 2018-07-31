@@ -1,13 +1,18 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import * as PlacesAPI from './PlacesAPI'
+import PropTypes from 'prop-types'
 import FocusLock from 'react-focus-lock' // >> https://github.com/theKashey/react-focus-lock
-
 // Portal example seen from Kent C. Dodds >> https://codesandbox.io/s/00254q4n6p
 
 const modalRoot = document.querySelector("#modal-root");
 
 class Modal extends Component {
+  static propTypes = {
+    venue: PropTypes.object.isRequired,
+    onClose: PropTypes.func.isRequired
+  }
+
   state = {
     venueDetails: {},
   }
@@ -20,6 +25,8 @@ class Modal extends Component {
   }
 
   render() {
+    const { onClose } = this.props;
+    const { name, bestPhoto, hours, location } = this.state.venueDetails;
     return ReactDOM.createPortal(
       <FocusLock>
         <div
@@ -35,7 +42,7 @@ class Modal extends Component {
             backgroundColor: 'rgba(0,0,0,0.3)',
             zIndex: 9999
           }}
-          onClick={this.props.onClose}
+          onClick={onClose}
         >
           <div
             style={{
@@ -52,19 +59,19 @@ class Modal extends Component {
               zIndex: 10000,
             }}
           >
-            <h2>{this.state.venueDetails.name}</h2>
+            <h2>{name}</h2>
             <div className="modal-info">
               <img
-                src={this.state.venueDetails.bestPhoto ? this.state.venueDetails.bestPhoto.prefix + 300 + this.state.venueDetails.bestPhoto.suffix : "No info provided by foursquare"}
-                alt={this.state.venueDetails.name}
+                src={bestPhoto ? bestPhoto.prefix + 300 + bestPhoto.suffix : "No info provided by foursquare"}
+                alt={name}
               />
               <div className="venue-details">
-                <span className="highlighted">Open Now:</span><span>{this.state.venueDetails.hours && this.state.venueDetails.hours.isOpen ? this.state.venueDetails.hours.isOpen ? "Yes" : "No" : "No info provided by foursquare"}</span>
-                <span className="highlighted">Address:</span><span>{this.state.venueDetails.location && this.state.venueDetails.location.address && this.state.venueDetails.location.city ? this.state.venueDetails.location.address + ", " + this.state.venueDetails.location.city : "No info provided by foursquare"}</span>
+                <span className="highlighted">Open Now:</span><span>{hours && hours.isOpen ? hours.isOpen ? "Yes" : "No" : "No info provided by foursquare"}</span>
+                <span className="highlighted">Address:</span><span>{location && location.address && location.city ? location.address + ", " + location.city : "No info provided by foursquare"}</span>
               </div>
               <button
                 className="modal-close"
-                onClick={this.props.onClose}>
+                onClick={onClose}>
                 Close
               </button>
             </div>

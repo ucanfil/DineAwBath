@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 import { Map, Marker, GoogleApiWrapper } from 'google-maps-react';
+import PropTypes from 'prop-types'
 
 export class MapContainer extends Component {
+  static propTypes = {
+    places: PropTypes.array.isRequired,
+    onOpenModal: PropTypes.func.isRequired
+  }
+
   state = {
     selectedPlace: {},
     activeMarker: {}
@@ -29,6 +35,7 @@ export class MapContainer extends Component {
   };
 
   render() {
+    const { google, places, onOpenModal } = this.props;
     // Map Style object
     const style = {
       width: '100%',
@@ -37,17 +44,17 @@ export class MapContainer extends Component {
 
     // Creating points array of places
     const points = [];
-    const bounds = new this.props.google.maps.LatLngBounds();
-    for (let i = 0; i < this.props.places.length; i++) {
+    const bounds = new google.maps.LatLngBounds();
+    for (let i = 0; i < places.length; i++) {
       // Get the position from the locations array.
-      const myLatLng = new this.props.google.maps.LatLng(this.props.places[i].location.lat, this.props.places[i].location.lng);
+      const myLatLng = new google.maps.LatLng(places[i].location.lat, places[i].location.lng);
       points.push(myLatLng);
       bounds.extend(points[i]);
     }
 
     return (
       <Map
-        google={this.props.google}
+        google={google}
         zoom={15}
         style={style}
         initialCenter={{
@@ -58,14 +65,14 @@ export class MapContainer extends Component {
         bounds={bounds}
         >
 
-        {this.props.places.map((venue, i) => (
+        {places.map((venue, i) => (
           <Marker
             key={i}
-            onClick={() => this.props.onOpenModal(venue)}
+            onClick={() => onOpenModal(venue)}
             name={venue.name}
             position={{ lat: venue.location.lat, lng: venue.location.lng}}
             onMouseOver={this.onMouseOverMarker}
-            animation={this.props.google.maps.Animation.DROP}
+            animation={google.maps.Animation.DROP}
           />
         ))}
       </Map>
