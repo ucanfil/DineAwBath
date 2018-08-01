@@ -7,7 +7,7 @@ export const getAll = () =>
       return res.json();
     })
     .catch(function (err) {
-      console.log('An error occured while fetching foursquare places api', err);
+      alert('An error occured while fetching foursquare places api', err);
     });
 
 export const getVenueDetails = (id) =>
@@ -16,5 +16,5 @@ export const getVenueDetails = (id) =>
       return res.json();
     })
     .catch(function (err) {
-      console.log('An error occured while fetching foursquare places api', err);
+      alert('An error occured while fetching foursquare places api', err);
     });
