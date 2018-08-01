@@ -43,11 +43,12 @@ class App extends Component {
 
   render() {
     const { query, places, isSidebarOpen, showModal, venue } = this.state;
-    let showingPlaces;
-    if (query) {
+    let showingPlaces = [];
+    // Check if query and places are truthy
+    if (query && places) {
       const match = new RegExp(escapeRegExp(query), 'i');
       showingPlaces = places.filter(venue => match.test(venue.name));
-    } else {
+    } else if (places) {
       showingPlaces = places;
     }
     showingPlaces.sort(sortBy('name'));
@@ -89,7 +90,7 @@ class App extends Component {
                 title="Tea Rooms"
               >
                 <ul className="cafe-list" aria-labelledby="categoryheader">
-                  {showingPlaces.filter(venue => {
+                  {(showingPlaces.length > 1) ? (showingPlaces.filter(venue => {
                     let match = new RegExp(/\btea\b/, 'i')
                     return match.test(venue.name) ? venue.name : ''
                   }).map(venue =>
@@ -98,14 +99,14 @@ class App extends Component {
                       onClick={() => this.handleToggleModal(venue)}
                       key={venue.id}>
                       <a href="#internal">{venue.name}</a>
-                    </li>)}
+                    </li>)) : (<li style={{ color: 'red' }}>An error occured while fetching foursquare places api</li>)}
                 </ul>
               </Category>
               <Category
                 title="Coffee Shops"
               >
                 <ul className="cafe-list" aria-labelledby="categoryheader">
-                  {showingPlaces.filter(venue => {
+                  {(showingPlaces.length > 1) ? (showingPlaces.filter(venue => {
                     let match = new RegExp(/\bcoffee\b/, 'i')
                     return match.test(venue.name) ? venue.name : ''
                   }).map(venue =>
@@ -114,7 +115,7 @@ class App extends Component {
                       onClick={() => this.handleToggleModal(venue)}
                       key={venue.id}>
                       <a href="#internal">{venue.name}</a>
-                    </li>)}
+                    </li>)) : (<li style={{ color: 'red' }}>An error occured while fetching foursquare places api</li>)}
                 </ul>
               </Category>
             </RestaurantList>
