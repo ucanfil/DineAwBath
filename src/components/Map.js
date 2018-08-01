@@ -20,7 +20,7 @@ export class MapContainer extends Component {
     }
   }
 
-  onMouseOverMarker = (props, marker, e) => {
+  onMarkerClick = (props, marker, e) => {
     this.setState({
       selectedPlace: props,
       activeMarker: marker
@@ -75,11 +75,15 @@ export class MapContainer extends Component {
         {places.map((venue, i) => (
           <Marker
             key={i}
-            onClick={() => onOpenModal(venue)}
+            onClick={(e) => {
+              onOpenModal(venue);
+              this.onMarkerClick(e);
+            }}
             name={venue.name}
             position={{ lat: venue.location.lat, lng: venue.location.lng}}
             onMouseOver={this.onMouseOverMarker}
-            animation={google.maps.Animation.DROP}
+            // Checking if the venue name is same with selected marker then it will animate
+            animation={venue.name === this.state.selectedPlace.name ? google.maps.Animation.DROP : null}
           />
         ))}
       </Map>
