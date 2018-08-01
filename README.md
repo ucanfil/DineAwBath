@@ -7,9 +7,15 @@ This application built with React, using Google Maps API and foursquare API to f
 
 To get started developing right away, clone the repo from [here](https://github.com/ucanfil/Eat-nDrink) to your system and style and add functionalities as you wish. Inside of your folder:
 
-* install all project dependencies with `npm install`
-* start the development server with `npm start` on `localhost:3000`
-* You can see a production build of this app on [here](https://ucanfil.github.io/Eat-nDrink/)
+* Install all project dependencies with `npm install`
+* Start the development server with `npm start` on `localhost:3000`
+* To test out service worker functionality you should run the app in production build, in order to achieve this in your preferred command line tool, run:
+  - `npm run build`
+*  Builds the app for production to the build folder.\
+  It correctly bundles React in production mode and optimizes the build for the best performance.\
+  The build is minified and the filenames include the hashes.\
+  By default, it also includes a service worker so that your app loads from local cache on future visits.
+* You can see a production build of this app on [here](https://github.com/ucanfil/dineobath)
 
 ## Folder Structure
 
@@ -19,7 +25,6 @@ After creation, your project should look like this:
 Eat-nDrink/
   README.md
   node_modules/
-  build/
   package.json
   package-lock.json
   public/
@@ -36,6 +41,18 @@ Eat-nDrink/
     index.js
     registerServiceWorker.js
 ```
+
+## Installing a Dependency
+
+The generated project includes React and ReactDOM as dependencies. It also includes a set of scripts used by Create React App as a development dependency and some other sets of dependencies you can see below. Make sure you install all project dependencies with `npm install` first.
+
+  * *Dependencies This Project Uses* \
+  [react-hamburger-menu](https://github.com/cameronbourke/react-hamburger-menu) `npm install --save react-hamburger-menu`\
+  [escape-string-regexp](https://github.com/sindresorhus/escape-string-regexp) `npm install --save escape-string-regexp`\
+  [sort-by](https://github.com/kvnneff/sort-by) `npm install --save sort-by`\
+  [google-maps-react](https://github.com/fullstackreact/google-maps-react) `npm install --save google-maps-react`\
+  [react-focus-lock](https://github.com/theKashey/react-focus-lock) `npm install --save react-focus-lock`
+
 ## Features
 
 * Application uses accessibility standards.
