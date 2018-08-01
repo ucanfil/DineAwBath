@@ -13,6 +13,13 @@ export class MapContainer extends Component {
     activeMarker: {}
   }
 
+   // Checking if google maps loads successfully
+  componentDidMount() {
+    window.gm_authFailure = function() {
+      alert("An error occured while google maps api is loading, check your connection, or try again later.");
+    }
+  }
+
   onMouseOverMarker = (props, marker, e) => {
     this.setState({
       selectedPlace: props,
