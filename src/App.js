@@ -16,6 +16,7 @@ class App extends Component {
     isSidebarOpen: true,
     showModal: false,
     venue: {},
+    activeMarkerID: null
   }
 
   updateQuery = (query) => {
@@ -36,6 +37,7 @@ class App extends Component {
     this.setState({
       venue: venue,
       showModal: true,
+      activeMarkerID: venue.id
     })
   }
 
@@ -51,8 +53,9 @@ class App extends Component {
     } else if (places) {
       showingPlaces = places;
     }
-    showingPlaces.sort(sortBy('name'));
-
+    // Sorting by name + id, this way while mapping through them it renders always in the same order,
+    // even the places with same names e.g. "Costa Coffee"
+    showingPlaces.sort(sortBy('name', 'id'));
     return (
       <div className="App">
         <div className="container">
@@ -126,6 +129,7 @@ class App extends Component {
             role='application'
             className={isSidebarOpen ? null : "disabled"}>
             <MapContainer
+              activeMarkerID={this.state.activeMarkerID}
               onOpenModal={this.handleToggleModal}
               places={showingPlaces.filter(venue => {
                 let match = new RegExp(/\bcoffee\b|\btea\b/, 'i')
