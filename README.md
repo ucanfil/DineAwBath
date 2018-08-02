@@ -10,11 +10,14 @@ To get started developing right away, clone the repo from [here](https://github.
 * Install all project dependencies with `npm install`
 * Start the development server with `npm start` on `localhost:3000`
 * To test out service worker functionality you should run the app in production build, in order to achieve this in your preferred command line tool, run:
+  -  Builds the app for production to the build folder.\
   - `npm run build`
-*  Builds the app for production to the build folder.\
-  It correctly bundles React in production mode and optimizes the build for the best performance.\
-  The build is minified and the filenames include the hashes.\
-  By default, it also includes a service worker so that your app loads from local cache on future visits.
+    It correctly bundles React in production mode and optimizes the build for the best performance.\
+    The build is minified and the filenames include the hashes.\
+    By default, it also includes a service worker so that your app loads from local cache on future visits.
+  - `npm install -g serve`
+  - `serve -s build`
+  - navigate to `http://localhost:3000/`
 * You can see a production build of this app on [here](https://github.com/ucanfil/dineobath)
 
 ## Folder Structure
