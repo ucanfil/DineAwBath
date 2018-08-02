@@ -10,7 +10,7 @@ export class MapContainer extends Component {
 
   state = {
     selectedPlace: {},
-    activeMarker: {}
+    activeMarker: {},
   }
 
    // Checking if google maps loads successfully
@@ -23,7 +23,7 @@ export class MapContainer extends Component {
   onMarkerClick = (props, marker, e) => {
     this.setState({
       selectedPlace: props,
-      activeMarker: marker
+      activeMarker: marker,
     });
   };
 
@@ -72,9 +72,9 @@ export class MapContainer extends Component {
         bounds={bounds}
         >
 
-        {places.map((venue, i) => (
+        {places.map((venue) => (
           <Marker
-            key={i}
+            key={venue.id}
             onClick={(e) => {
               onOpenModal(venue);
               this.onMarkerClick(e);
@@ -83,7 +83,7 @@ export class MapContainer extends Component {
             position={{ lat: venue.location.lat, lng: venue.location.lng}}
             onMouseOver={this.onMouseOverMarker}
             // Checking if the venue name is same with selected marker then it will animate
-            animation={venue.name === this.state.selectedPlace.name ? google.maps.Animation.DROP : null}
+            animation={this.props.activeMarkerID === venue.id ? google.maps.Animation.DROP : null}
           />
         ))}
       </Map>
