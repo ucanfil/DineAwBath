@@ -18,7 +18,7 @@ To get started developing right away, clone the repo from [here](https://github.
   - `npm install -g serve`
   - `serve -s build`
   - navigate to `http://localhost:3000/`
-* You can see a production build of this app on [here](https://github.com/ucanfil/dineobath)
+* You can see a production build of this app on [here](https://ucanfil.github.io/dineobath/)
 
 ## Folder Structure
 
